@@ -100,23 +100,6 @@ async def Player_Time():
         client.send_message("/avatar/parameters/ClockSecond",Second)
     await asyncio.sleep(0)
 
-'''SEND RANDOMS TO VRCHAT'''
-async def Player_Random_Source():
-    VRC_Rand_Bool = bool(random.randint(0,1))
-    VRC_Rand_Int = random.randint(0,255)
-    VRC_Rand_Float = round(float(random.random()),3)
-    print("B:",VRC_Rand_Bool,"|","I:",VRC_Rand_Int,"|","F:",VRC_Rand_Float,"#DEBUG") #DEBUG
-    if __name__ == "__main__":
-        parser = argparse.ArgumentParser()
-        parser.add_argument("--ip" , default=ip , help="The ip of the OSC server")
-        parser.add_argument("--port" , type=int , default=port_VRC_IN , help="The port the OSC server is listening on")
-        args = parser.parse_args()
-        client = pythonosc.udp_client.SimpleUDPClient(args.ip, args.port)
-        client.send_message("/avatar/parameters/VRC_Rand_Bool",VRC_Rand_Bool)
-        client.send_message("/avatar/parameters/VRC_Rand_Int",VRC_Rand_Int)
-        client.send_message("/avatar/parameters/VRC_Rand_Float",VRC_Rand_Float)
-    await asyncio.sleep(0)
-
 '''SET UP SERVER LISTENING'''
 async def init_Concurrent_Server():
     dispatcher = Dispatcher()
@@ -131,7 +114,6 @@ async def init_Concurrent_Server():
     while True:
         await Player_Velocity()
         await Player_Time()
-        #await Player_Random_Source()
         await asyncio.sleep(0.01)
         ClearConsole()
     
